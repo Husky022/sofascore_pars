@@ -41,4 +41,5 @@ class MotorSport(Base):
     id = Column(Integer(), primary_key=True)
     name = Column(String(128))
     type = Column(String(128))
+    season = Column(String(128))
     category_id = Column(ForeignKey("motorsport_category.id"))

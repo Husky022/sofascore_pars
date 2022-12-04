@@ -1,12 +1,12 @@
 import requests
 
+import time
+
 from settings import disciplines
 
 from database.manager import DBManager
 
 from datetime import date
-
-from pprint import pprint
 
 
 class ApiParser:
@@ -23,9 +23,7 @@ class ApiParser:
         tournament_id = 1
         tournaments_to_db = []
         events_to_db = []
-        motor_category_id = 1
         motor_categories = []
-        motorsports = []
         for target in self.targets:
             if target == 'motorsport':
                 try:
@@ -55,7 +53,6 @@ class ApiParser:
                         'league_id': tournament_id,
                     }
                     events_to_db.append(event)
-                print(f'{target} - DONE')
             except KeyError:
                 print(f'{target} - ERROR! - ошибка ключа')
             tournament_id += 1
@@ -66,7 +63,11 @@ class ApiParser:
 
 
     def run(self):
+        start_time = time.time()
         self.download_data()
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Elapsed run time: {elapsed_time} seconds")
 
 
 if __name__ == "__main__":
